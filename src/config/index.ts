@@ -63,7 +63,7 @@ export const SITE_CONTENT: SiteContent = {
             name: "BlazorSaas",
             summary: "From Code to Cloud in Days, Not Weeks: The C# Template That Gets You to Market Faster.",
             link: "https://blazorsaas.com/",
-            image: "/spotifu.png",
+            image: "/blazorsaas.png",
         },
         {
             name: "Vockify",
