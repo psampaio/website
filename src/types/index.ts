@@ -35,6 +35,7 @@ export interface ProjectProps {
   summary: string;
   image: string;
   link: string;
+  linkText: string;
 }
 
 export interface AboutProps {

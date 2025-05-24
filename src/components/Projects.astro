@@ -12,7 +12,7 @@ const {projects} = Astro.props;
 
 <Section text="Projects" href="projects">
     {
-        projects.map(({name, summary, image, link}, index) => {
+        projects.map(({name, summary, image, link, linkText}, index) => {
             const top = 98 + index * 40;
             return (
                     <div style={`top: ${top}px;`}
@@ -28,7 +28,7 @@ const {projects} = Astro.props;
                                 <div class="flex gap-5 pt-10 text-white">
                                     <a href={link} target="_blank"
                                        class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline">
-                                        {link}
+                                        {linkText}
                                     </a>
                                 </div>
                             </div>
