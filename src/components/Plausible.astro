@@ -1,0 +1,15 @@
+---
+import type {SiteConfig} from "@types";
+
+type Props = Pick<SiteConfig, "plausibleDomain">;
+
+const {plausibleDomain} = Astro.props;
+---
+
+<script is:inline
+        defer data-domain={plausibleDomain}
+        src="https://plausible.codvoc.com/js/script.outbound-links.js"></script>
+
+<script is:inline>
+    window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+</script>

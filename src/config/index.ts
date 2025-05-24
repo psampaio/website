@@ -18,6 +18,7 @@ export const SITE_CONFIG: SiteConfig = {
     ],
     socialImage: "/zen-og.png",
     canonicalURL: "https://pedrosampaio.me",
+    plausibleDomain: "pedrosampaio.me",
 };
 
 export const SITE_CONTENT: SiteContent = {
