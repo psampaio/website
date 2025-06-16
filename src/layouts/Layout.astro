@@ -1,4 +1,12 @@
 ---
+import type {Entry} from "@keystatic/core/reader"
+import keystaticConfig from "../../keystatic.config";
+import {reader} from "../reader";
+
+type OwnerInfoProps = Entry<(typeof keystaticConfig)['singletons']['ownerInfo']>
+const ownerInfo = await reader.singletons.ownerInfo.read();
+const {name, headline, description, small_image} = ownerInfo as OwnerInfoProps;
+
 import Header from "@components/Header.astro";
 import "@fontsource/be-vietnam-pro";
 import "@fontsource-variable/gabarito";
@@ -7,12 +15,9 @@ import Footer from "@components/Footer.astro";
 import Plausible from "@components/Plausible.astro";
 
 const {
-    title,
-    description,
-    siteLogo,
+    title= `${name} - ${headline}`,
     navLinks,
     lang,
-    author,
     socialLinks,
     socialImage,
     canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
@@ -27,7 +32,7 @@ const ogImgUrl = canonicalURL + socialImage;
 <head>
     <meta charset="UTF-8"/>
     <meta name="description" content={description}/>
-    <meta name="author" content={author}/>
+    <meta name="author" content={name}/>
     <meta name="viewport" content="width=device-width"/>
     <link rel="icon" type="image/png" href="/favicon.png"/>
     <meta name="generator" content={Astro.generator}/>
@@ -46,10 +51,10 @@ const ogImgUrl = canonicalURL + socialImage;
     <Plausible plausibleDomain={plausibleDomain}/>
 </head>
 <body class="bg-black font-sans">
-<Header siteLogo={siteLogo} navLinks={navLinks}/>
+<Header siteLogo={small_image} navLinks={navLinks}/>
 <main class="mx-auto max-w-3xl px-5">
     <slot/>
 </main>
-<Footer author={author} socialLinks={socialLinks}/>
+<Footer author={name} socialLinks={socialLinks}/>
 </body>
 </html>

@@ -11,7 +11,6 @@ export interface SiteConfig extends HeaderProps {
 
 export interface SiteContent {
     experience: ExperienceProps[];
-    about: AboutProps;
 }
 
 export interface ExperienceProps {
