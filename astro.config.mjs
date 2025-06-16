@@ -10,5 +10,6 @@ export default defineConfig({
   vite: {
       plugins: [tailwindcss()]
   },
-  integrations: [react(), mdx(), ...(process.env.SKIP_KEYSTATIC ? [] : [keystatic()])],
+  // integrations: [react(), mdx(), ...(process.env.SKIP_KEYSTATIC ? [] : [keystatic()])],
+  integrations: [react(), mdx()],
 });
