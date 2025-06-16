@@ -1,15 +1,12 @@
 ---
-import {reader} from '../reader'
+import {Entry} from "@keystatic/core/reader"
+import {reader} from "../reader"
+import keystaticConfig from "../../keystatic.config";
 
-export interface Props {
-    name: string;
-    tagLine: string;
-    summary: string;
-    cta: string;
-}
+type HeroInfo = Entry<(typeof keystaticConfig)['singletons']['heroInfo']>
 
 const heroInfo = await reader.singletons.heroInfo.read();
-const {name, tagLine, summary, cta} = heroInfo as Props;
+const {name, tagLine, summary, cta} = heroInfo as HeroInfo;
 
 // hero: {
 //     name: "Pedro Sampaio",
