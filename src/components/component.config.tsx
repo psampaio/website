@@ -3,10 +3,10 @@ import {block} from '@keystatic/core/content-components'
 export const Hero = block({
     label: 'Hero',
     schema: {},
-    ContentView: (prop) => {
+    ContentView: () => {
         return (
             <div>
-                <h1>Hero Section</h1>
+                <h2>Hero Section</h2>
             </div>
         );
     }
@@ -15,10 +15,22 @@ export const Hero = block({
 export const Projects = block({
     label: 'Projects',
     schema: {},
-    ContentView: (prop) => {
+    ContentView: () => {
         return (
             <div>
-                <h1>Projects Section</h1>
+                <h2>Projects Section</h2>
+            </div>
+        );
+    }
+})
+
+export const About = block({
+    label: 'About',
+    schema: {},
+    ContentView: () => {
+        return (
+            <div>
+                <h2>About Section</h2>
             </div>
         );
     }

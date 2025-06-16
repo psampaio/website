@@ -1,35 +1,30 @@
 ---
 import Section from "./Section.astro";
 import {Image} from "astro:assets";
-import type {AboutProps, HeroProps} from "@types";
 
-type Props = AboutProps & Pick<HeroProps, "name">;
+import type {Entry} from "@keystatic/core/reader"
+import keystaticConfig from "../../keystatic.config";
+import {reader} from "../reader";
 
-const {description1, description2, description3, image, name} = Astro.props;
+import {marked} from 'marked';
+
+type OwnerInfoProps = Entry<(typeof keystaticConfig)['singletons']['ownerInfo']>
+const ownerInfo = await reader.singletons.ownerInfo.read();
+const {name, about, large_image} = ownerInfo as OwnerInfoProps;
 ---
 
 <Section text="About Me" href="about">
     <div class="flex flex-col items-center gap-12 md:flex-row md:gap-8">
-      <div>
-        <p class="w-auto text-base text-neutral mb-8 md:pr-5">
-          {description1}
-        </p>
-
-        <p class="w-auto text-base text-neutral mb-8 md:pr-5">
-          {description2}
-        </p>
-
-        <p class="w-auto text-base text-neutral mb-8 md:pr-5">
-          {description3}
-        </p>
-        
-      </div>
+        <div class="w-auto text-base text-neutral mb-8 md:pr-5" set:html={marked(await about())}>
+        </div>
         <div class="h-80 w-64 flex-shrink-0 rotate-[5deg] bg-white p-4 md:rotate-[7deg]">
-            <Image class="object-cover"
-                   src={image}
-                   width="260"
-                   height="260"
-                   alt={name}/>
+            {large_image && (
+                    <Image class="object-cover"
+                           src={large_image}
+                           width="260"
+                           height="260"
+                           alt={name}/>
+            )}
         </div>
     </div>
 </Section>

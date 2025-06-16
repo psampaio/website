@@ -1,6 +1,6 @@
 import {collection, config, fields, singleton} from '@keystatic/core';
 
-import {Hero, Projects} from '@components/component.config.tsx'
+import {About, Hero, Projects} from '@components/component.config.tsx'
 
 export default config({
     storage: {
@@ -22,7 +22,8 @@ export default config({
                     label: 'Content',
                     components: {
                         Hero,
-                        Projects
+                        Projects,
+                        About
                     }
                 }),
             },
@@ -45,12 +46,31 @@ export default config({
         })
     },
     singletons: {
+        ownerInfo: singleton({
+            label: "Owner Info",
+            path: "src/content/owner-info/",
+            // format: {contentField: "about"},
+            schema: {
+                name: fields.text({label: "Name"}),
+                headline: fields.text({label: "Headline"}),
+                description: fields.text({label: "Description"}),
+                about: fields.mdx({label: "About"}),
+                small_image: fields.image({
+                    label: "Small Profile Image",
+                    directory: "public/images",
+                    publicPath: "/images"
+                }),
+                large_image: fields.image({
+                    label: "Large Profile Image",
+                    directory: "public/images",
+                    publicPath: "/images"
+                }),
+            }
+        }),
         heroInfo: singleton({
             label: "Hero Info",
             path: 'src/content/hero-info',
             schema: {
-                name: fields.text({label: 'Name'}),
-                tagLine: fields.text({label: 'Tag Line'}),
                 summary: fields.text({label: 'Summary', multiline: true}),
                 cta: fields.url({label: 'CTA', description: 'Link to your CTA'})
             }
