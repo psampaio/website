@@ -1,8 +1,22 @@
 ---
-import type {HeroProps} from "@types";
-type Props = HeroProps;
+import {reader} from '../reader'
 
-const {name, specialty, summary, cta} = Astro.props;
+export interface Props {
+    name: string;
+    tagLine: string;
+    summary: string;
+    cta: string;
+}
+
+const heroInfo = await reader.singletons.heroInfo.read();
+const {name, tagLine, summary, cta} = heroInfo as Props;
+
+// hero: {
+//     name: "Pedro Sampaio",
+//     specialty: "Product and Engineering Leader",
+//     summary: "I’m a product and engineering leader with over 20 years of software experience, turning strategic visions into reality through impactful product and software delivery.",
+//     cta: "https://www.linkedin.com/in/pedrosampaio/",
+// },
 ---
 
 <section class="py-24 md:py-32" id="#hero">
@@ -10,7 +24,7 @@ const {name, specialty, summary, cta} = Astro.props;
         {name}
     </h1>
     <p class="mb-9 font-serif text-4xl leading-[46px] font-bold tracking-tighter text-primary sm:text-5xl md:text-6xl">
-        {specialty}
+        {tagLine}
     </p>
     <p class="mb-16 text-base font-normal text-neutral md:text-lg">
         {summary}

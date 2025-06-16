@@ -22,12 +22,6 @@ export const SITE_CONFIG: SiteConfig = {
 };
 
 export const SITE_CONTENT: SiteContent = {
-    hero: {
-        name: "Pedro Sampaio",
-        specialty: "Product and Engineering Leader",
-        summary: "I’m a product and engineering leader with over 20 years of software experience, turning strategic visions into reality through impactful product and software delivery.",
-        cta: "https://www.linkedin.com/in/pedrosampaio/",
-    },
     experience: [
         {
             company: "Zalmart",
