@@ -1,10 +1,18 @@
 ---
 import type {SiteConfig} from "@types";
+type Props = Pick<SiteConfig,  "socialLinks">;
 
-type Props = Pick<SiteConfig, "author" | "socialLinks">;
+import type {Entry} from "@keystatic/core/reader"
+import keystaticConfig from "../../keystatic.config";
+import {reader} from "../reader";
 
-const {author, socialLinks} = Astro.props;
+const {socialLinks} = Astro.props;
 const currentYear = new Date().getFullYear();
+
+type OwnerInfoProps = Entry<(typeof keystaticConfig)['singletons']['ownerInfo']>
+const ownerInfo = await reader.singletons.ownerInfo.read();
+const {name} = ownerInfo as OwnerInfoProps;
+
 ---
 
 <footer class="w-full border-t border-neutral/20 px-5 pt-5 pb-8 text-center text-white">
@@ -22,6 +30,6 @@ const currentYear = new Date().getFullYear();
         }
     </ul>
     <p class="text-xs mb-1.5">
-        {author} © {currentYear}.
+        {name} © {currentYear}.
     </p>
 </footer>

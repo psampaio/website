@@ -15,8 +15,6 @@ import Footer from "@components/Footer.astro";
 import Plausible from "@components/Plausible.astro";
 
 const {
-    title= `${name} - ${headline}`,
-    navLinks,
     lang,
     socialLinks,
     socialImage,
@@ -24,7 +22,14 @@ const {
     plausibleDomain
 } = SITE_CONFIG;
 
+const title = `${name} - ${headline}`;
 const ogImgUrl = canonicalURL + socialImage;
+const navLinks = [
+    // {text: "Experience", href: "#experience"},
+    {text: "Projects", href: "#projects"},
+    {text: "About", href: "#about"},
+];
+const siteLogo = small_image ?? "";
 ---
 
 <!doctype html>
@@ -51,10 +56,10 @@ const ogImgUrl = canonicalURL + socialImage;
     <Plausible plausibleDomain={plausibleDomain}/>
 </head>
 <body class="bg-black font-sans">
-<Header siteLogo={small_image} navLinks={navLinks}/>
+<Header siteLogo={siteLogo} navLinks={navLinks}/>
 <main class="mx-auto max-w-3xl px-5">
     <slot/>
 </main>
-<Footer author={name} socialLinks={socialLinks}/>
+<Footer socialLinks={socialLinks}/>
 </body>
 </html>
