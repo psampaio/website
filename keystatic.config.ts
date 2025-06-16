@@ -1,6 +1,6 @@
 import {collection, config, fields, singleton} from '@keystatic/core';
 
-import {Hero} from '@components/component.config.tsx'
+import {Hero, Projects} from '@components/component.config.tsx'
 
 export default config({
     storage: {
@@ -21,11 +21,28 @@ export default config({
                 content: fields.mdx({
                     label: 'Content',
                     components: {
-                        Hero
+                        Hero,
+                        Projects
                     }
                 }),
             },
         }),
+        projects: collection({
+            label: "Projects",
+            slugField: 'name',
+            path: 'src/content/projects/*',
+            schema: {
+                name: fields.slug({name: {label: 'Name'}}),
+                summary: fields.text({label: 'Summary'}),
+                image: fields.image({
+                    label: 'Image',
+                    directory: "public/images/projects",
+                    publicPath: "/images/projects"
+                }),
+                url: fields.url({label: 'Link'}),
+                urlText: fields.text({label: 'Link Text'})
+            }
+        })
     },
     singletons: {
         heroInfo: singleton({
@@ -39,4 +56,4 @@ export default config({
             }
         })
     }
-});
+})

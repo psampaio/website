@@ -1,18 +1,21 @@
 ---
+import type {Entry} from "@keystatic/core/reader"
+import keystaticConfig from "../../keystatic.config";
+
+import {reader} from "../reader"
+
 import Section from "./Section.astro";
 import {Image} from "astro:assets";
-import type {ProjectProps} from "@types";
 
-interface Props {
-    projects: ProjectProps[];
-}
+type ProjectProps = Entry<(typeof keystaticConfig)['collections']['projects']>
 
-const {projects} = Astro.props;
+const projectsData = await reader.collections.projects.all()
+const projects: ProjectProps[] = projectsData.map(({entry}) => entry);
 ---
 
 <Section text="Projects" href="projects">
     {
-        projects.map(({name, summary, image, link, linkText}, index) => {
+        projects.map(({name, summary, image, url, urlText}, index) => {
             const top = 98 + index * 40;
             return (
                     <div style={`top: ${top}px;`}
@@ -26,15 +29,17 @@ const {projects} = Astro.props;
                                     {summary}
                                 </p>
                                 <div class="flex gap-5 pt-10 text-white">
-                                    <a href={link} target="_blank"
+                                    <a href={url} target="_blank"
                                        class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline">
-                                        {linkText}
+                                        {urlText}
                                     </a>
                                 </div>
                             </div>
                             <div class="flex items-end justify-end overflow-hidden">
-                                <Image class="h-full w-[95%] rounded-ss-xl rounded-ee-2xl object-none object-left-top sm:h-[85%] sm:w-full"
-                                       src={image} alt={name} width="736" height="483"/>
+                                {image && (
+                                        <Image class="h-full w-[95%] rounded-ss-xl rounded-ee-2xl object-none object-left-top sm:h-[85%] sm:w-full"
+                                               src={image} alt={name} width="736" height="483"/>
+                                )}
                             </div>
                         </div>
                     </div>

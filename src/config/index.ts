@@ -53,29 +53,6 @@ export const SITE_CONTENT: SiteContent = {
                 "Developed and integrated a real-time vehicle tracking system using WebSockets, improving accuracy and data update in the application. This functionality increased user satisfaction by 30% and reduced customer service inquiries by 25%.",
         },
     ],
-    projects: [
-        {
-            name: "BlazorSaas",
-            summary: "From Code to Cloud in Days, Not Weeks: The C# Template That Gets You to Market Faster.",
-            link: "https://blazorsaas.com/?utm_source=psme",
-            linkText: "https://blazorsaas.com/",
-            image: "/blazorsaas.png",
-        },
-        {
-            name: "Vockify",
-            summary: "Turn messy customer feedback into clear product priorities.",
-            link: "https://vockify.com/?utm_source=psme",
-            linkText: "https://vockify.com/",
-            image: "/shopify-clon.png",
-        },
-        {
-            name: "Not A Todo",
-            summary: "Track your life, not your lists.",
-            link: "https://notatodo.com/?utm_source=psme",
-            linkText: "https://notatodo.com/",
-            image: "/clone-ig.png",
-        },
-    ],
     about: {
         description1: "I’m a product and engineering leader with over 20 years of software experience, connecting vision with execution to deliver impactful solutions. My career began as a software engineer, building user-friendly products that generated millions of USD in revenue. A drive to shape broader strategies led me to product management, where I honed my ability to craft solutions that deliver value to users and businesses.",
         description2: "Today, I’m dedicated to two passions: empowering product and engineering teams to excel through collaboration and streamlined processes, and building micro-SaaS products—compact, user-focused tools that solve real problems with simplicity and innovation. My dual expertise allows me to guide teams to deliver exceptional software while creating my own scalable, user-focused solutions.",

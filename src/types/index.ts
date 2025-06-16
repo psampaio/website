@@ -11,7 +11,6 @@ export interface SiteConfig extends HeaderProps {
 
 export interface SiteContent {
     experience: ExperienceProps[];
-    projects: ProjectProps[];
     about: AboutProps;
 }
 
@@ -21,14 +20,6 @@ export interface ExperienceProps {
     startDate: string;
     endDate: string;
     summary: string | string[];
-}
-
-export interface ProjectProps {
-    name: string;
-    summary: string;
-    image: string;
-    link: string;
-    linkText: string;
 }
 
 export interface AboutProps {

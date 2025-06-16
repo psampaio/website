@@ -1,19 +1,12 @@
 ---
-import {Entry} from "@keystatic/core/reader"
-import {reader} from "../reader"
+import type {Entry} from "@keystatic/core/reader"
 import keystaticConfig from "../../keystatic.config";
+import {reader} from "../reader"
 
-type HeroInfo = Entry<(typeof keystaticConfig)['singletons']['heroInfo']>
+type HeroInfoProps = Entry<(typeof keystaticConfig)['singletons']['heroInfo']>
 
 const heroInfo = await reader.singletons.heroInfo.read();
-const {name, tagLine, summary, cta} = heroInfo as HeroInfo;
-
-// hero: {
-//     name: "Pedro Sampaio",
-//     specialty: "Product and Engineering Leader",
-//     summary: "I’m a product and engineering leader with over 20 years of software experience, turning strategic visions into reality through impactful product and software delivery.",
-//     cta: "https://www.linkedin.com/in/pedrosampaio/",
-// },
+const {name, tagLine, summary, cta} = heroInfo as HeroInfoProps;
 ---
 
 <section class="py-24 md:py-32" id="#hero">
