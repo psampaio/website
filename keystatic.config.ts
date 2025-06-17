@@ -41,7 +41,8 @@ export default config({
                     publicPath: "/images/projects"
                 }),
                 url: fields.url({label: 'Link'}),
-                urlText: fields.text({label: 'Link Text'})
+                urlText: fields.text({label: 'Link Text'}),
+                order: fields.number({label: "Order"})
             }
         }),
         posts: collection({
@@ -81,6 +82,7 @@ export default config({
             schema: {
                 title: fields.slug({name: {label: 'Title'}}),
                 url: fields.url({label: 'Link'}),
+                order: fields.number({label: "Order"})
             }
         }),
         socialLinks: collection({
@@ -90,6 +92,7 @@ export default config({
             schema: {
                 title: fields.slug({name: {label: 'Title'}}),
                 url: fields.url({label: 'Link'}),
+                order: fields.number({label: "Order"})
             }
         })
     },

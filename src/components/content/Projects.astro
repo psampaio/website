@@ -3,9 +3,12 @@ import type {ProjectProps} from "../../types";
 import {reader} from "../../reader"
 import Section from "../Section.astro";
 import {Image} from "astro:assets";
+import {sortArray} from "../../utils";
 
 const projectsData = await reader.collections.projects.all()
-const projects: ProjectProps[] = projectsData.map(({entry}) => entry);
+const projects: ProjectProps[] = sortArray(
+    projectsData.map(({entry}) => entry),
+    entry => entry.order);
 ---
 
 <Section text="Projects" href="projects">

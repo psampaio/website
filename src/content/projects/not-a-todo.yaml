@@ -1,4 +1,6 @@
 name: Not A Todo
 summary: Track your life, not your lists.
+image: /images/projects/not-a-todo/image.png
 url: https://notatodo.com/?utm_source=psme
 urlText: https://notatodo.com/
+order: 3

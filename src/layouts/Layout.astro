@@ -1,12 +1,12 @@
 ---
 import {reader} from "../reader";
-
 import Header from "@components/Header.astro";
 import "@fontsource/be-vietnam-pro";
 import "@fontsource-variable/gabarito";
 import Footer from "@components/Footer.astro";
 import Plausible from "@components/Plausible.astro";
 import type {OwnerInfoProps, SiteInfoProps, SocialLinksProps, NavLinksProps} from "@types";
+import {sortArray} from "../utils";
 
 const ownerInfo = await reader.singletons.ownerInfo.read();
 const {name, headline, description, small_image} = ownerInfo as OwnerInfoProps;
@@ -27,11 +27,14 @@ const ogImgUrl = new URL(
 ).href;
 
 const socialLinksData = await reader.collections.socialLinks.all();
-const socialLinks: SocialLinksProps[] = socialLinksData.map(({entry}) => entry);
+const socialLinks: SocialLinksProps[] = sortArray(
+    socialLinksData.map(({entry}) => entry),
+    entry => entry.order);
 
 const navLinksData = await reader.collections.navLinks.all();
-const navLinks: NavLinksProps[] = navLinksData.map(({entry}) => entry);
-
+const navLinks: NavLinksProps[] = sortArray(
+    navLinksData.map(({entry}) => entry)
+    , entry => entry.order);
 ---
 
 <!doctype html>
