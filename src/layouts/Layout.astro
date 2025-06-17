@@ -1,39 +1,41 @@
 ---
-import type {Entry} from "@keystatic/core/reader"
-import keystaticConfig from "../../keystatic.config";
 import {reader} from "../reader";
-
-type OwnerInfoProps = Entry<(typeof keystaticConfig)['singletons']['ownerInfo']>
-const ownerInfo = await reader.singletons.ownerInfo.read();
-const {name, headline, description, small_image} = ownerInfo as OwnerInfoProps;
 
 import Header from "@components/Header.astro";
 import "@fontsource/be-vietnam-pro";
 import "@fontsource-variable/gabarito";
-import {SITE_CONFIG} from "@config";
 import Footer from "@components/Footer.astro";
 import Plausible from "@components/Plausible.astro";
+import type {OwnerInfoProps, SiteInfoProps, SocialLinksProps, NavLinksProps} from "@types";
 
+const ownerInfo = await reader.singletons.ownerInfo.read();
+const {name, headline, description, small_image} = ownerInfo as OwnerInfoProps;
+
+const siteInfo = await reader.singletons.siteInfo.read();
 const {
-    lang,
-    socialLinks,
+    language,
     socialImage,
-    canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+    canonicalUrl,
     plausibleDomain
-} = SITE_CONFIG;
+} = siteInfo as SiteInfoProps || {};
 
 const title = `${name} - ${headline}`;
-const ogImgUrl = canonicalURL + socialImage;
-const navLinks = [
-    // {text: "Experience", href: "#experience"},
-    {text: "Projects", href: "#projects"},
-    {text: "About", href: "#about"},
-];
 const siteLogo = small_image ?? "";
+const ogImgUrl = new URL(
+    socialImage ?? "",
+    canonicalUrl ?? Astro.site ?? Astro.url.origin
+).href;
+
+const socialLinksData = await reader.collections.socialLinks.all();
+const socialLinks: SocialLinksProps[] = socialLinksData.map(({entry}) => entry);
+
+const navLinksData = await reader.collections.navLinks.all();
+const navLinks: NavLinksProps[] = navLinksData.map(({entry}) => entry);
+
 ---
 
 <!doctype html>
-<html lang={lang} class="scroll-pt-16 scroll-smooth">
+<html lang={language} class="scroll-pt-16 scroll-smooth">
 <head>
     <meta charset="UTF-8"/>
     <meta name="description" content={description}/>
@@ -45,21 +47,21 @@ const siteLogo = small_image ?? "";
 
     <meta property="og:title" content={title}/>
     <meta property="og:description" content={description}/>
-    <meta property="og:url" content={canonicalURL}/>
+    <meta property="og:url" content={canonicalUrl}/>
     <meta property="og:image" content={ogImgUrl}/>
 
     <meta property="twitter:card" content="summary_large_image"/>
-    <meta property="twitter:url" content={canonicalURL}/>
+    <meta property="twitter:url" content={canonicalUrl}/>
     <meta property="twitter:title" content={title}/>
     <meta property="twitter:description" content={description}/>
     <meta property="twitter:image" content={ogImgUrl}/>
-    <Plausible plausibleDomain={plausibleDomain}/>
+    <Plausible domain={plausibleDomain}/>
 </head>
 <body class="bg-black font-sans">
 <Header siteLogo={siteLogo} navLinks={navLinks}/>
 <main class="mx-auto max-w-3xl px-5">
     <slot/>
 </main>
-<Footer socialLinks={socialLinks}/>
+<Footer name={name} socialLinks={socialLinks}/>
 </body>
 </html>

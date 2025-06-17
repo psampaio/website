@@ -29,4 +29,15 @@ const posts = defineCollection({
     }),
 })
 
-export const collections = {pages, projects, posts}
+const experience = defineCollection({
+    loader: glob({pattern: '**/*.mdx', base: 'src/content/experience'}),
+    schema: z.object({
+        company: z.string(),
+        position: z.string(),
+        startDate: z.date(),
+        endDate: z.date().optional(),
+        summary: z.string(),
+    }),
+})
+
+export const collections = {pages, projects, posts, experience}

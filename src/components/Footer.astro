@@ -1,29 +1,22 @@
 ---
-import type {SiteConfig} from "@types";
-type Props = Pick<SiteConfig,  "socialLinks">;
+interface FooterProps {
+    name: string;
+    socialLinks: { title: string; url: string }[];
+}
 
-import type {Entry} from "@keystatic/core/reader"
-import keystaticConfig from "../../keystatic.config";
-import {reader} from "../reader";
-
-const {socialLinks} = Astro.props;
+const {name, socialLinks} = Astro.props as FooterProps;
 const currentYear = new Date().getFullYear();
-
-type OwnerInfoProps = Entry<(typeof keystaticConfig)['singletons']['ownerInfo']>
-const ownerInfo = await reader.singletons.ownerInfo.read();
-const {name} = ownerInfo as OwnerInfoProps;
-
 ---
 
 <footer class="w-full border-t border-neutral/20 px-5 pt-5 pb-8 text-center text-white">
     <ul class="mb-5 flex flex-wrap justify-center gap-x-5 text-xs">
         {
-            socialLinks.map(({text, href}) => (
+            socialLinks.map(({title, url}) => (
                     <li>
-                        <a href={href}
+                        <a href={url}
                            target="_blank"
                            class="inline-block px-4 py-3 after:relative after:bottom-[-4px] after:content-[url(/external.svg)] hover:text-primary">
-                            {text}
+                            {title}
                         </a>
                     </li>
             ))

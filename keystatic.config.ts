@@ -34,7 +34,7 @@ export default config({
             path: 'src/content/projects/*',
             schema: {
                 name: fields.slug({name: {label: 'Name'}}),
-                summary: fields.text({label: 'Summary'}),
+                summary: fields.text({label: 'Summary', multiline: true}),
                 image: fields.image({
                     label: 'Image',
                     directory: "public/images/projects",
@@ -43,13 +43,60 @@ export default config({
                 url: fields.url({label: 'Link'}),
                 urlText: fields.text({label: 'Link Text'})
             }
+        }),
+        posts: collection({
+            label: "Posts",
+            slugField: "title",
+            path: "src/content/posts/*",
+            format: {contentField: 'content'},
+            entryLayout: "content",
+            schema: {
+                title: fields.slug({name: {label: "Title"}}),
+                description: fields.text({label: "Description"}),
+                pubDate: fields.date({label: "Published On"}),
+                thumbnail: fields.image({
+                    label: "Thumbnail",
+                    directory: "public/images/posts/",
+                    publicPath: "images/posts"
+                }),
+                content: fields.mdx({label: "Content"})
+            }
+        }),
+        experience: collection({
+            label: "Experience",
+            slugField: "position",
+            path: "src/content/experience/*",
+            schema: {
+                company: fields.slug({name: {label: "Company"}}),
+                position: fields.text({label: "Position"}),
+                startDate: fields.date({label: "Start Date"}),
+                endDate: fields.date({label: "End Date"}),
+                summary: fields.text({label: "Summary", multiline: true}),
+            }
+        }),
+        navLinks: collection({
+            label: "Navigation Links",
+            slugField: 'title',
+            path: 'src/content/nav-links/*',
+            schema: {
+                title: fields.slug({name: {label: 'Title'}}),
+                url: fields.url({label: 'Link'}),
+            }
+        }),
+        socialLinks: collection({
+            label: "Social Links",
+            slugField: 'title',
+            path: 'src/content/social-links/*',
+            schema: {
+                title: fields.slug({name: {label: 'Title'}}),
+                url: fields.url({label: 'Link'}),
+            }
         })
     },
     singletons: {
         ownerInfo: singleton({
             label: "Owner Info",
             path: "src/content/owner-info/",
-            // format: {contentField: "about"},
             schema: {
                 name: fields.text({label: "Name"}),
                 headline: fields.text({label: "Headline"}),
@@ -65,6 +112,21 @@ export default config({
                     directory: "public/images",
                     publicPath: "/images"
                 }),
+            }
+        }),
+        siteInfo: singleton({
+            label: "Site Info",
+            path: "src/content/site-info",
+            schema: {
+                language: fields.text({label: "Language"}), // "en",
+                socialImage: fields.image({
+                    label: "Social Image",
+                    directory: "public/images",
+                    publicPath: "/images"
+                }), //"/zen-og.png",
+                canonicalUrl: fields.url({label: "Canonical URL"}), //"https://pedrosampaio.me",
+                plausibleDomain: fields.text({label: "Plausible Domain"}) //"pedrosampaio.me",
+
             }
         }),
         heroInfo: singleton({

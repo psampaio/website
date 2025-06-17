@@ -1,14 +1,10 @@
 ---
-import Section from "./Section.astro";
+import type {OwnerInfoProps} from "@types";
+import Section from "../Section.astro";
 import {Image} from "astro:assets";
-
-import type {Entry} from "@keystatic/core/reader"
-import keystaticConfig from "../../keystatic.config";
-import {reader} from "../reader";
-
+import {reader} from "../../reader";
 import {marked} from 'marked';
 
-type OwnerInfoProps = Entry<(typeof keystaticConfig)['singletons']['ownerInfo']>
 const ownerInfo = await reader.singletons.ownerInfo.read();
 const {name, about, large_image} = ownerInfo as OwnerInfoProps;
 ---

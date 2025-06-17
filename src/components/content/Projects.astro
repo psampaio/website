@@ -1,13 +1,8 @@
 ---
-import type {Entry} from "@keystatic/core/reader"
-import keystaticConfig from "../../keystatic.config";
-
-import {reader} from "../reader"
-
-import Section from "./Section.astro";
+import type {ProjectProps} from "../../types";
+import {reader} from "../../reader"
+import Section from "../Section.astro";
 import {Image} from "astro:assets";
-
-type ProjectProps = Entry<(typeof keystaticConfig)['collections']['projects']>
 
 const projectsData = await reader.collections.projects.all()
 const projects: ProjectProps[] = projectsData.map(({entry}) => entry);
