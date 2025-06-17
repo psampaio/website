@@ -2,12 +2,12 @@
 import Menu from "@icons/Menu.astro";
 import {Image} from "astro:assets";
 
-interface HeaderProps {
+interface Props {
     siteLogo: string;
     navLinks: { title: string; url: string }[];
 }
 
-const {siteLogo, navLinks} = Astro.props as HeaderProps;
+const {siteLogo, navLinks} = Astro.props;
 ---
 
 <header class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-black px-5 py-6">

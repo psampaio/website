@@ -1,10 +1,10 @@
 ---
-interface FooterProps {
+interface Props {
     name: string;
     socialLinks: { title: string; url: string }[];
 }
 
-const {name, socialLinks} = Astro.props as FooterProps;
+const {name, socialLinks} = Astro.props;
 const currentYear = new Date().getFullYear();
 ---
 

@@ -1,9 +1,9 @@
 ---
-interface PlausibleProps {
+interface Props {
     domain: string;
 }
 
-const {domain} = Astro.props as PlausibleProps;
+const {domain} = Astro.props;
 ---
 
 <script is:inline

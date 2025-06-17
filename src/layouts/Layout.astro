@@ -20,11 +20,8 @@ const {
 } = siteInfo as SiteInfoProps || {};
 
 const title = `${name} - ${headline}`;
-const siteLogo = small_image ?? "";
-const ogImgUrl = new URL(
-    socialImage ?? "",
-    canonicalUrl ?? Astro.site ?? Astro.url.origin
-).href;
+const siteLogo = small_image;
+const ogImgUrl = new URL(socialImage, canonicalUrl ?? Astro.site ?? Astro.url.origin).href;
 
 const socialLinksData = await reader.collections.socialLinks.all();
 const socialLinks: SocialLinksProps[] = sortArray(
