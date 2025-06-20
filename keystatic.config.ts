@@ -53,7 +53,7 @@ export default config({
             entryLayout: "content",
             schema: {
                 title: fields.slug({name: {label: "Title", validation: {isRequired: true}}}),
-                description: fields.text({label: "Description"}),
+                description: fields.text({label: "Description", multiline: true}),
                 pubDate: fields.date({label: "Published On", validation: {isRequired: true}}),
                 thumbnail: fields.image({
                     label: "Thumbnail",

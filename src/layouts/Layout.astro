@@ -1,12 +1,18 @@
 ---
-import {reader} from "../reader";
-import Header from "@components/Header.astro";
 import "@fontsource/be-vietnam-pro";
 import "@fontsource-variable/gabarito";
+
+import {SEO} from "astro-seo";
+import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Plausible from "@components/Plausible.astro";
-import type {OwnerInfoProps, SiteInfoProps, SocialLinksProps, NavLinksProps} from "@types";
+
+import {reader} from "../reader";
 import {sortArray} from "../utils";
+
+import type {OwnerInfoProps, SiteInfoProps, SocialLinksProps, NavLinksProps} from "@types";
+
+import "../styles/global.css";
 
 const ownerInfo = await reader.singletons.ownerInfo.read();
 const {name, headline, description, small_image} = ownerInfo as OwnerInfoProps;
@@ -37,24 +43,41 @@ const navLinks: NavLinksProps[] = sortArray(
 <!doctype html>
 <html lang={language} class="scroll-pt-16 scroll-smooth">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="description" content={description}/>
-    <meta name="author" content={name}/>
-    <meta name="viewport" content="width=device-width"/>
-    <link rel="icon" type="image/png" href="/favicon.png"/>
-    <meta name="generator" content={Astro.generator}/>
     <title>{title}</title>
-
-    <meta property="og:title" content={title}/>
-    <meta property="og:description" content={description}/>
-    <meta property="og:url" content={canonicalUrl}/>
-    <meta property="og:image" content={ogImgUrl}/>
-
-    <meta property="twitter:card" content="summary_large_image"/>
-    <meta property="twitter:url" content={canonicalUrl}/>
-    <meta property="twitter:title" content={title}/>
-    <meta property="twitter:description" content={description}/>
-    <meta property="twitter:image" content={ogImgUrl}/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <SEO
+            title={title}
+            description={description}
+            openGraph={{
+                basic: {
+                    title: title,
+                    type: "website",
+                    image: ogImgUrl,
+                    url: canonicalUrl,
+                },
+                optional: {
+                    description: description,
+                }
+            }}
+            twitter={{
+                site: "@psampaio",
+                creator: "@psampaio",
+                card: "summary_large_image",
+                title: title,
+                description: description,
+                image: ogImgUrl
+            }}
+            extend={{
+                link: [
+                    {rel: "icon", href: "/favicon.png", type: "image/png"},
+                ],
+                meta: [
+                    {name: "generator", content: Astro.generator},
+                    {name: "twitter:url", content: canonicalUrl},
+                ],
+            }}
+    />
     <Plausible domain={plausibleDomain}/>
 </head>
 <body class="bg-black font-sans">
