@@ -1,53 +1,72 @@
 @import "tailwindcss";
 
+@plugin '@tailwindcss/typography';
+
 @theme {
-  --font-sans: "Be Vietnam Pro", system-ui, sans-serif;
-  --font-serif: "Gabarito Variable", ui-serif, serif;
+    --font-sans: "Be Vietnam Pro", system-ui, sans-serif;
+    --font-serif: "Gabarito Variable", ui-serif, serif;
 
-  --color-primary: #2563eb;
-  --color-neutral: #94a3b8;
-  --color-white: #e2e8f0;
-  --color-black: #0e141b;
+    --color-primary-50: #eff4ff;
+    --color-primary-100: #dbe6fe;
+    --color-primary-200: #bfd3fe;
+    --color-primary-300: #93b4fd;
+    --color-primary-400: #6090fa;
+    --color-primary-500: #3b76f6;
+    --color-primary-600: #2563eb;
+    --color-primary-700: #1d58d8;
+    --color-primary-800: #1e4baf;
+    --color-primary-900: #1e408a;
+    --color-primary-950: #172a54;
 
-  --text-xs: 0.875rem;
-  --text-xs--line-height: 1.125rem;
-  --text-sm: 1rem;
-  --text-sm--line-height: 1.25rem;
-  --text-base: 1.125rem;
-  --text-base--line-height: 1.625rem;
-  --text-lg: 1.25rem;
-  --text-lg--line-height: 1.75rem;
-  --text-xl: 1.5rem;
-  --text-xl--line-height: 1.813rem;
-  --text-2xl: 1.75rem;
-  --text-2xl--line-height: 2.125rem;
-  --text-3xl: 2rem;
-  --text-3xl--line-height: 2.375rem;
-  --text-4xl: 2.25rem;
-  --text-4xl--line-height: 2.688rem;
-  --text-5xl: 2.5rem;
-  --text-5xl--line-height: 3rem;
-  --text-6xl: 3rem;
-  --text-6xl--line-height: 3.625rem;
-  --text-7xl: 3.75rem;
-  --text-7xl--line-height: 1;
-  --text-8xl: 4.5rem;
-  --text-8xl--line-height: 4.875rem;
-  --text-9xl: 6rem;
-  --text-9xl--line-height: 6.625rem;
+    --color-neutral: #94a3b8;
+    --color-white: #e2e8f0;
+    --color-black: #0e141b;
 
-  --tracking-tightest: -2px;
-  --tracking-tighter: -1px;
-  --tracking-tight: -0.25px;
+    --text-xs: 0.875rem;
+    --text-xs--line-height: 1.125rem;
+    --text-sm: 1rem;
+    --text-sm--line-height: 1.25rem;
+    --text-base: 1.125rem;
+    --text-base--line-height: 1.625rem;
+    --text-lg: 1.25rem;
+    --text-lg--line-height: 1.75rem;
+    --text-xl: 1.5rem;
+    --text-xl--line-height: 1.813rem;
+    --text-2xl: 1.75rem;
+    --text-2xl--line-height: 2.125rem;
+    --text-3xl: 2rem;
+    --text-3xl--line-height: 2.375rem;
+    --text-4xl: 2.25rem;
+    --text-4xl--line-height: 2.688rem;
+    --text-5xl: 2.5rem;
+    --text-5xl--line-height: 3rem;
+    --text-6xl: 3rem;
+    --text-6xl--line-height: 3.625rem;
+    --text-7xl: 3.75rem;
+    --text-7xl--line-height: 1;
+    --text-8xl: 4.5rem;
+    --text-8xl--line-height: 4.875rem;
+    --text-9xl: 6rem;
+    --text-9xl--line-height: 6.625rem;
 
-  --animate-slide-in: slide-in 600ms ease both;
+    --tracking-tightest: -2px;
+    --tracking-tighter: -1px;
+    --tracking-tight: -0.25px;
 
-  @keyframes slide-in {
-    10% {
-      transform: translateY(-100%);
+    --animate-fade-out: fade-out 5000ms ease both;
+    @keyframes fade-out {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0.5;
+        }
     }
-    100% {
-      transform: translateY(0);
+}
+
+@layer base {
+    hr {
+        margin: 3rem 0;
     }
-  }
+
 }

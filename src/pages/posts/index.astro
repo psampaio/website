@@ -1,0 +1,44 @@
+---
+import {getCollection} from "astro:content";
+import {Image} from "astro:assets";
+
+import Layout from "../../layouts/TitleLayout.astro";
+import Section from "../../components/Section.astro";
+
+const allPosts = await getCollection('posts')
+const sortedPosts = allPosts.sort((a: any, b: any) => {
+    return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+})
+
+export const prerender = true;
+---
+
+<Layout>
+    <Section text="Posts">
+        {
+            sortedPosts.map((post: any) => (
+                    <div class="mb-16">
+                        {post.data.image &&
+                                <Image src={post.data.image} alt={post.data.title} width={600} height={400}/>}
+                        <div>
+                            <h4 class="mb-0 text-sm font-normal text-neutral-400">
+                                {`Posted on ${new Date(post.data.pubDate).toLocaleDateString('en-US', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric'
+                                })}`}
+                            </h4>
+                            <h3 class="mb-4 text-xl text-white">
+                                <a href={`/posts/${post.id}`}>{post.data.title}</a>
+                            </h3>
+                            {post.data.description && (
+                                    <blockquote class="font-normal text-neutral-400">
+                                        {post.data.description}
+                                    </blockquote>
+                            )}
+                        </div>
+                    </div>
+            ))
+        }
+    </Section>
+</Layout>

@@ -13,9 +13,7 @@ export default defineConfig({
     vite: {
         plugins: [tailwindcss()]
     },
-
     integrations: [react(), mdx(), keystatic()],
-
     adapter: node({
         mode: "standalone"
     })

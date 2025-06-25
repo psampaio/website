@@ -1,0 +1,21 @@
+---
+import Layout from "./Layout.astro";
+import {reader} from "../reader";
+
+import type {OwnerInfoProps} from "../types";
+
+const ownerInfo = await reader.singletons.ownerInfo.read();
+const {name, headline} = ownerInfo as OwnerInfoProps;
+---
+
+<Layout>
+    <section class="py-16">
+        <p class="mb-1.5 font-serif text-3xl font-bold text-white">
+            {name}
+        </p>
+        <p class="font-serif text-2xl leading-[46px] font-bold text-primary-600">
+            {headline}
+        </p>
+    </section>
+    <slot/>
+</Layout>

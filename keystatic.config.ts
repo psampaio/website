@@ -1,7 +1,5 @@
 import {collection, config, fields, singleton} from '@keystatic/core';
 
-import {About, Hero, Projects} from '@components/component.config.tsx'
-
 export default config({
     storage: {
         kind: process.env.NODE_ENV === 'production' ? 'cloud' : 'local',
@@ -10,24 +8,6 @@ export default config({
         project: 'psampaio/website'
     },
     collections: {
-        pages: collection({
-            label: 'Pages',
-            slugField: 'title',
-            path: 'src/content/pages/*',
-            format: {contentField: 'content'},
-            entryLayout: "content",
-            schema: {
-                title: fields.slug({name: {label: 'Title', validation: {isRequired: true}}}),
-                content: fields.mdx({
-                    label: 'Content',
-                    components: {
-                        Hero,
-                        Projects,
-                        About
-                    }
-                }),
-            },
-        }),
         projects: collection({
             label: "Projects",
             slugField: 'name',
