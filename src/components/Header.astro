@@ -8,6 +8,7 @@ interface Props {
 }
 
 const {siteLogo, navLinks} = Astro.props;
+const currentPath = Astro.url.pathname;
 ---
 
 <header class="sticky top-0 z-50 mx-auto flex max-w-5xl justify-between bg-black px-5 py-6">
@@ -31,15 +32,19 @@ const {siteLogo, navLinks} = Astro.props;
          id="main-menu">
         <ul class="gap-2 sm:flex">
             {
-                navLinks.map(({title, url}) => (
+                navLinks.map(({title, url}) => {
+                    const isActive = currentPath === url || (url !== '/' && currentPath.startsWith(url));
+                    return (
                         <li class="relative">
-
                             <a href={url}
-                               class={`nav-item relative block p-2 text-sm font-medium transition-all duration-500 after:absolute after:bottom-0 after:left-2/4 after:h-2 after:w-1 after:-translate-x-2/4 after:text-primary-600 after:opacity-0 after:content-['•'] hover:text-white`}>
+                               class={`nav-item relative block p-2 text-sm font-medium transition-all duration-500 after:absolute after:bottom-0 after:left-2/4 after:h-2 after:w-1 after:-translate-x-2/4 after:text-primary-600 after:content-['•'] hover:text-white ${
+                                   isActive ? 'text-white md:after:opacity-100' : 'after:opacity-0'
+                               }`}>
                                 {title}
                             </a>
                         </li>
-                ))
+                    )
+                })
             }
         </ul>
     </nav>
@@ -61,37 +66,4 @@ const {siteLogo, navLinks} = Astro.props;
     navItems.forEach((item) => {
         item?.addEventListener("click", toggleMenu);
     });
-
-    // Update navigation based on scroll position with Intersection Observer
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    navItems.forEach((item) => {
-                        if (item.getAttribute("href") === `#${entry.target.id}`) {
-                            item.classList.add("text-white", "md:after:opacity-100");
-                        } else {
-                            item.classList.remove("text-white", "md:after:opacity-100");
-                        }
-                    });
-                }
-            });
-        },
-        {threshold: 0.5},
-    );
-
-    document.querySelectorAll("section").forEach((section) => {
-        observer.observe(section);
-    });
-
-    // Cleanup observer
-    document.onvisibilitychange = () => {
-        if (document.visibilityState === "hidden") {
-            observer.disconnect();
-        } else {
-            document.querySelectorAll("section").forEach((section) => {
-                observer.observe(section);
-            });
-        }
-    };
 </script>
