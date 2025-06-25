@@ -1,7 +1,7 @@
 ---
 import {getCollection, render} from 'astro:content'
 
-import Layout from "../../layouts/Layout.astro";
+import Layout from "../../layouts/TitleLayout.astro";
 import Prose from "../../components/Prose.astro";
 
 export const prerender = true;
@@ -21,10 +21,18 @@ const {Content} = await render(post);
 ---
 
 <Layout>
-    <Prose>
-        <h1>{post.data.title}</h1>
-        <div>
+    <h1 class="text-white text-5xl text-center">{post.data.title}</h1>
+    <p class="text-neutral-400 text-sm text-center mb-16">
+        {`Posted on ${new Date(post.data.pubDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        })}`}
+    </p>
+
+    <div class="mb-16">
+        <Prose>
             <Content/>
-        </div>
-    </Prose>
+        </Prose>
+    </div>
 </Layout>
